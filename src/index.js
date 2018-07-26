@@ -1,7 +1,14 @@
-// import React from 'react';
-// import ReactDOM from 'react-dom';
+// console.log("hello ginger snaps");
 
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-// ReactDOM.render(<App />, document.getElementById('app'));
-console.log("hello ginger");
+const App = () => {
+    return <div>Hello React!</div>;
+};
+
+ReactDOM.render(
+    <App />,
+    document.getElementById('root')
+);
 
