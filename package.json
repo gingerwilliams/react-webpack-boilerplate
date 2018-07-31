@@ -13,10 +13,11 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.18.0",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1"
+    "prop-types": "^15.6.2"
   },
   "devDependencies": {
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
     "babel": "^6.23.0",
     "babel-core": "^6.26.3",
     "babel-env": "^2.4.1",

@@ -3,15 +3,18 @@ import axios from "axios";
 import imgCode from  "../assets/code.png";
 import "../styles/style.less";
 
+import Manager from "./Manager";
+import Employee from "./Employee";
+
 
 class App extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            contacts: [],
+            employees: [],
         };
 
-        this.state.contacts
+        this.state.employees
     }
     
     componentDidMount() {
@@ -20,8 +23,8 @@ class App extends React.Component {
             .get(url)
             .then(response => {
 
-                // create an array of contacts only with relevant data
-                const newContacts = response.data.map(c => {
+                // create an array of employees only with relevant data
+                const newEmp = response.data.map(c => {
                   return {
                     id: c.id,
                     name: c.name
@@ -31,16 +34,16 @@ class App extends React.Component {
                 // create a new "State" object without mutating 
                 // the original State object. 
                 const newState = Object.assign({}, this.state, {
-                  contacts: newContacts
+                    employees: newEmp
                 });
         
                 // store the new state object in the component's state
                 this.setState(newState);
 
                 console.log(this);
-                console.log(this.state.contacts);
+                console.log(this.state.employees);
 
-                const name = this.state.contacts.name
+                const name = this.state.employees.name
               })
               .catch(error => console.log(error));
     }
@@ -49,13 +52,13 @@ class App extends React.Component {
         return (
             <div>
                 
-                <p className="title">Hello and Welcome!</p>
+                <h1 className="title">Hello <Manager name="Ginger Williams" />, and Welcome!</h1>
                 <img src={imgCode} className="img-sample" alt="img-alt" />
                 <div className="img">
                     <span><br/></span>
                 </div>
                 <ul>
-                  
+                    <Employee name="Ginger Williams" />
                 </ul>
             </div>
         );
