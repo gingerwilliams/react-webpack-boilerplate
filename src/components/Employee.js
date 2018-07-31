@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 function Employee(props){
-    return <li>Employee: {props.name}</li>;
+    return <li>{props.name}</li>;
 }
 
 //defined that the name prop is of type string and that it’s mandatory.

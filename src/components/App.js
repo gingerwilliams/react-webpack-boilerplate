@@ -4,17 +4,26 @@ import imgCode from  "../assets/code.png";
 import "../styles/style.less";
 
 import Manager from "./Manager";
-import Employee from "./Employee";
+import ManagerList from "./ManagerList";
+import EmployeeList from "./EmployeeList";
+
+// const employees = [
+//     { id: 1, name: "Leanne Graham" },
+//     { id: 2, name: "Ervin Howell" },
+//     { id: 3, name: "Clementine Bauch" },
+//     { id: 4, name: "Patricia Lebsack" }
+// ];
 
 
 class App extends React.Component {
+   
+
+
     constructor(props) {
         super(props)
         this.state = {
             employees: [],
         };
-
-        this.state.employees
     }
     
     componentDidMount() {
@@ -24,26 +33,23 @@ class App extends React.Component {
             .then(response => {
 
                 // create an array of employees only with relevant data
-                const newEmp = response.data.map(c => {
+                const emps = response.data.map(emp => {
                   return {
-                    id: c.id,
-                    name: c.name
+                    id: emp.id,
+                    name: emp.name,
+                    email: emp.email
                   };
                 });
         
-                // create a new "State" object without mutating 
-                // the original State object. 
+                //create a new "State" object without mutating 
+                //the original State object. 
                 const newState = Object.assign({}, this.state, {
-                    employees: newEmp
+                    employees: emps
                 });
         
                 // store the new state object in the component's state
                 this.setState(newState);
 
-                console.log(this);
-                console.log(this.state.employees);
-
-                const name = this.state.employees.name
               })
               .catch(error => console.log(error));
     }
@@ -52,13 +58,19 @@ class App extends React.Component {
         return (
             <div>
                 
-                <h1 className="title">Hello <Manager name="Ginger Williams" />, and Welcome!</h1>
+                <h1 className="title">Welcome: <Manager name="Ginger Williams" /></h1>
+                <div>
+                    <h2>Other Managment</h2>
+                    <ul>
+                        <ManagerList employees={this.state.employees} />
+                    </ul>
+                </div>
                 <img src={imgCode} className="img-sample" alt="img-alt" />
                 <div className="img">
                     <span><br/></span>
                 </div>
                 <ul>
-                    <Employee name="Ginger Williams" />
+                    <EmployeeList employees={this.state.employees}/>
                 </ul>
             </div>
         );
