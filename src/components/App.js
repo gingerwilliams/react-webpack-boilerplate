@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from "axios";
+import imgCode from  "../assets/code.png";
 import "../styles/style.less";
 
 
@@ -47,8 +48,12 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <div className="img"><br /></div>
+                
                 <p className="title">Hello and Welcome!</p>
+                <img src={imgCode} className="img-sample" alt="img-alt" />
+                <div className="img">
+                    <span><br/></span>
+                </div>
                 <ul>
                   
                 </ul>
