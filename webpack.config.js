@@ -40,6 +40,7 @@ module.exports = {
     plugins: [
         new HtmlWebPackPlugin({
             template: "./dist/index.html",
+            inject: false,
             filename: "./index.html"
       })
     ]
