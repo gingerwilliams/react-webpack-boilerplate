@@ -1,47 +1,67 @@
-const path = require('path');
-const HtmlWebPackPlugin = require('html-webpack-plugin');
-
+const path = require("path");
 
 module.exports = {
-    entry: ['babel-polyfill', './src/index.js'],
+    entry: ["babel-polyfill", "./src/index.js"],
     output: {
-        filename: 'bundle.js',
+        filename: "bundle.js",
         publicPath: "/dist/",
-        path: path.resolve(__dirname, 'dist')
+        path: path.resolve(__dirname, "dist")
     },
-
+    devServer: {
+        port: 8000,
+        open: true,
+        watchContentBase: true,
+        writeToDisk: true,
+        compress: true,
+        historyApiFallback: true,
+        contentBase: path.join(__dirname, "dist")
+    },
     module: {
         rules: [
             {
-                test: /\.js$/,
+                test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
                 use: {
-                    loader: 'babel-loader',
+                    loader: "babel-loader"
                 }
             },
             {
-                test: /\.less$/,
-                use: [{
-                    loader: 'style-loader'
-                }, {
-                    loader: 'css-loader'
-                }, {
-                    loader: 'less-loader'
-                }]
+                test: /\.(css|less)$/,
+                use: [
+                    {
+                        loader: "style-loader"
+                    },
+                    {
+                        loader: "css-loader"
+                    },
+                    {
+                        loader: "less-loader"
+                    }
+                ]
             },
             {
                 test: /\.(png|svg|jpg|gif)$/,
-                use: [{
-                    loader: 'file-loader'
-                }]
+                use: [
+                    {
+                        loader: "file-loader"
+                    }
+                ]
+            },
+            {
+                test: /\.(ttf|eot)$/,
+                use: [
+                    {
+                        loader: "file-loader"
+                    },
+                    {
+                        loader: "url-loader"
+                    }
+                ]
+            },
+            {
+                test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                loader: "url-loader"
             }
         ]
-    },
-    plugins: [
-        new HtmlWebPackPlugin({
-            template: "./dist/index.html",
-            inject: false,
-            filename: "./index.html"
-      })
-    ]
+    }
 };

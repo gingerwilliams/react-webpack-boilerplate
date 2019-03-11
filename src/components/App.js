@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 import axios from "axios";
-import imgCode from  "../assets/code.png";
+import imgCode from "../assets/code.png";
 import "../styles/style.less";
 
 import Manager from "./Manager";
@@ -14,51 +14,46 @@ import EmployeeList from "./EmployeeList";
 //     { id: 4, name: "Patricia Lebsack" }
 // ];
 
-
 class App extends React.Component {
-   
-
-
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
-            employees: [],
+            employees: []
         };
     }
-    
+
     componentDidMount() {
         const url = "https://jsonplaceholder.typicode.com/users";
         axios
             .get(url)
             .then(response => {
-
                 // create an array of employees only with relevant data
                 const emps = response.data.map(emp => {
-                  return {
-                    id: emp.id,
-                    name: emp.name,
-                    email: emp.email
-                  };
+                    return {
+                        id: emp.id,
+                        name: emp.name,
+                        email: emp.email
+                    };
                 });
-        
-                //create a new "State" object without mutating 
-                //the original State object. 
+
+                //create a new "State" object without mutating
+                //the original State object.
                 const newState = Object.assign({}, this.state, {
                     employees: emps
                 });
-        
+
                 // store the new state object in the component's state
                 this.setState(newState);
-
-              })
-              .catch(error => console.log(error));
+            })
+            .catch(error => console.log(error));
     }
 
     render() {
         return (
             <div>
-                
-                <h1 className="title">Welcome: <Manager name="Ginger Williams" /></h1>
+                <h1 className="title">
+                    Welcome: <Manager name="Ginger Williams" />
+                </h1>
                 <div>
                     <h2>Other Managment</h2>
                     <ul>
@@ -67,10 +62,12 @@ class App extends React.Component {
                 </div>
                 <img src={imgCode} className="img-sample" alt="img-alt" />
                 <div className="img">
-                    <span><br/></span>
+                    <span>
+                        <br />
+                    </span>
                 </div>
                 <ul>
-                    <EmployeeList employees={this.state.employees}/>
+                    <EmployeeList employees={this.state.employees} />
                 </ul>
             </div>
         );
