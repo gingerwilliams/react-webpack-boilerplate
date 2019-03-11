@@ -23,6 +23,7 @@ class App extends React.Component {
     }
 
     componentDidMount() {
+        console.log("render mount");
         const url = "https://jsonplaceholder.typicode.com/users";
         axios
             .get(url)
